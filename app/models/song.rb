@@ -3,9 +3,18 @@ class Song < ActiveRecord::Base
   belongs_to :genre
 
   def get_genre_name
+    self.genre.name
   end
 
   def drake_made_this
+    drake = Artist.find_by(name: "Drake")
+
+    if drake
+      self.artist = drake
+    else
+      drake = Artist.create(name: "Drake")
+      self.artist = drake
+    end
     # when this method is called it should assign the song's artist to Drake
   end
 end
